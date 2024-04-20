@@ -33,7 +33,7 @@ export default function FormCategoryCreate({ setModalOpen }: IProps) {
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    fetch("/api/categories", {
+    await fetch("/api/categories", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

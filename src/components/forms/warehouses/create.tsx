@@ -17,14 +17,17 @@ import { Input } from "@/components/ui/input";
 
 const formSchema = z.object({
   name: z.string().min(1, {
-    message: "Marca no puede estar vacio",
+    message: "Almacén no puede estar vacio",
+  }),
+  address: z.string().min(1, {
+    message: "Dirección del almacén no puede estar vacio",
   }),
 });
 
 interface IProps {
   setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
-export default function FormBrandCreate({ setModalOpen }: IProps) {
+export default function FormWarehouseCreate({ setModalOpen }: IProps) {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -33,7 +36,7 @@ export default function FormBrandCreate({ setModalOpen }: IProps) {
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    await fetch("/api/brands", {
+    fetch("/api/warehouses", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -51,9 +54,22 @@ export default function FormBrandCreate({ setModalOpen }: IProps) {
           name="name"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Marca</FormLabel>
+              <FormLabel>Nombre Almacén</FormLabel>
               <FormControl>
-                <Input placeholder="Corona" {...field} />
+                <Input placeholder="Bodega 23" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="address"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Dirección</FormLabel>
+              <FormControl>
+                <Input placeholder="Los Alerces 32, San Miguel" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>

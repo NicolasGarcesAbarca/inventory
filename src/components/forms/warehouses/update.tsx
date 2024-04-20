@@ -14,31 +14,41 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { WarehousesSelect } from "@/server/db/types";
 
 const formSchema = z.object({
   name: z.string().min(1, {
-    message: "Marca no puede estar vacio",
+    message: "Proveedor no puede estar vacio",
+  }),
+  address: z.string().min(1, {
+    message: "Dirección del almacén no puede estar vacio",
   }),
 });
 
 interface IProps {
   setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  warehouse: WarehousesSelect;
 }
-export default function FormBrandCreate({ setModalOpen }: IProps) {
+
+export default function FormWarehouseUpdate({
+  warehouse,
+  setModalOpen,
+}: IProps) {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: "",
+      name: warehouse.name,
+      address: warehouse.address,
     },
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    await fetch("/api/brands", {
-      method: "POST",
+    fetch("/api/warehouses", {
+      method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(values),
+      body: JSON.stringify({ ...values, id: warehouse.id }),
     });
     setModalOpen((prev) => !prev);
   }
@@ -51,9 +61,22 @@ export default function FormBrandCreate({ setModalOpen }: IProps) {
           name="name"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Marca</FormLabel>
+              <FormLabel>Nombre</FormLabel>
               <FormControl>
-                <Input placeholder="Corona" {...field} />
+                <Input placeholder="Fabricante" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="address"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Dirección</FormLabel>
+              <FormControl>
+                <Input placeholder="Los Alerces 32, San Miguel" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>

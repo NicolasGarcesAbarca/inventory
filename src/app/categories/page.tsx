@@ -1,4 +1,4 @@
-import DrawerDialogCategory from "@/components/dialogs/DrawerDialogCategory";
+import DrawerDialogCategoryCreate from "@/components/dialogs/DrawerDialogCategoryCreate";
 import {
   Table,
   TableBody,
@@ -9,18 +9,16 @@ import {
 } from "@/components/ui/table";
 import { db } from "@/server/db";
 import { Categories } from "@/server/db/schema";
-import { HiTrash } from "react-icons/hi";
-import { Button } from "@/components/ui/button";
-import DrawerDialogCategoryUpdate from "@/components/dialogs/DrawerDialogCategoryUpdate";
 import DrawerDialogCategoryDelete from "@/components/dialogs/DrawerDialogCategoryDelete";
+import { DrawerDialogCategoryUpdate } from "@/components/dialogs/DrawerDialogCategoryUpdate";
 
 export default async function CategoriesComp() {
   const categories = await db.select().from(Categories);
   return (
     <div className="px-24  w-full h-screen">
-      <h1 className="text-2xl font-bold my-6">Categorias</h1>
+      <h1 className="text-2xl font-bold my-6">Categorías</h1>
       <div className="py-4 flex flex-row-reverse">
-        <DrawerDialogCategory />
+        <DrawerDialogCategoryCreate />
       </div>
       <Table className="border">
         <TableHeader>

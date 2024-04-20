@@ -1,5 +1,4 @@
 "use client";
-import * as React from "react";
 
 import { useMediaQuery } from "usehooks-ts";
 import { Button } from "@/components/ui/button";
@@ -21,28 +20,40 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer";
-import FormCategoryCreate from "../forms/categories/create";
 
-export default function DrawerDialogCategory() {
-  const [open, setOpen] = React.useState(false);
+export interface DrawerDialog {
+  buttonText: string;
+  dialogTitle: string;
+  dialogDescription: string;
+  open: boolean;
+  setOpen: (open: boolean) => void;
+}
+
+interface IProps extends DrawerDialog {
+  children: React.ReactNode;
+}
+export default function DrawerDialogBase({
+  children,
+  buttonText,
+  dialogTitle,
+  dialogDescription,
+  open,
+  setOpen,
+}: IProps) {
   const isDesktop = useMediaQuery("(min-width: 768px)");
 
   if (isDesktop) {
     return (
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
-          <Button variant="outline">Nueva Categoría</Button>
+          <Button variant="outline">{buttonText}</Button>
         </DialogTrigger>
         <DialogContent className="sm:max-w-[425px]">
           <DialogHeader>
-            <DialogTitle>Categoría</DialogTitle>
-            <DialogDescription>
-              Crea una nueva categoría para tus productos
-            </DialogDescription>
+            <DialogTitle>{dialogTitle}</DialogTitle>
+            <DialogDescription>{dialogDescription}</DialogDescription>
           </DialogHeader>
-          <div>
-            <FormCategoryCreate setModalOpen={setOpen} />
-          </div>
+          <div>{children}</div>
         </DialogContent>
       </Dialog>
     );
@@ -51,18 +62,14 @@ export default function DrawerDialogCategory() {
   return (
     <Drawer open={open} onOpenChange={setOpen}>
       <DrawerTrigger asChild>
-        <Button variant="outline">Nueva Categoría</Button>
+        <Button variant="outline">{buttonText}</Button>
       </DrawerTrigger>
       <DrawerContent>
         <DrawerHeader className="text-left">
-          <DrawerTitle>Edit profile</DrawerTitle>
-          <DrawerDescription>
-            Make changes to your profile here. Click save when you done.
-          </DrawerDescription>
+          <DrawerTitle>{dialogTitle}</DrawerTitle>
+          <DrawerDescription>{dialogDescription}</DrawerDescription>
         </DrawerHeader>
-        <div>
-          <h1>HERE SHOULD BE</h1>
-        </div>
+        <div>{children}</div>
         <DrawerFooter className="pt-2">
           <DrawerClose asChild>
             <Button variant="outline">Cancel</Button>

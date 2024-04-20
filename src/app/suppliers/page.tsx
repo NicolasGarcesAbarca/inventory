@@ -1,63 +1,48 @@
-"use client";
-
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
-
-import { Button } from "@/components/ui/button";
 import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import { db } from "@/server/db";
+import { Suppliers } from "@/server/db/schema";
+import DrawerDialogSupplierCreate from "@/components/dialogs/DrawerDialogSupplierCreate";
+import { DrawerDialogSupplierUpdate } from "@/components/dialogs/DrawerDialogSupplierUpdate";
+import DrawerDialogSupplierDelete from "@/components/dialogs/DrawerDialogSupplierDelete";
 
-const formSchema = z.object({
-  name: z.string().min(1, {
-    message: "Categoria no puede estar vacio",
-  }),
-});
-
-export default function Supliers() {
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      name: "",
-    },
-  });
-
-  async function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log({ log: values });
-    fetch("/api/categories", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(values),
-    });
-  }
-
+export default async function CategoriesComp() {
+  const suppliers = await db.select().from(Suppliers);
   return (
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-        <FormField
-          control={form.control}
-          name="name"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Categoria</FormLabel>
-              <FormControl>
-                <Input placeholder="shadcn" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <Button type="submit">Submit</Button>
-      </form>
-    </Form>
+    <div className="px-24  w-full h-screen">
+      <h1 className="text-2xl font-bold my-6">Proveedores</h1>
+      <div className="py-4 flex flex-row-reverse">
+        <DrawerDialogSupplierCreate />
+      </div>
+      <Table className="border">
+        <TableHeader>
+          <TableRow>
+            <TableHead>Nombre</TableHead>
+            <TableHead>Acciones</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {suppliers.map((supplier) => (
+            <TableRow key={supplier.id}>
+              <TableCell className="font-medium">{supplier.name}</TableCell>
+              <TableCell className="flex gap-2">
+                <div>
+                  <DrawerDialogSupplierUpdate supplier={supplier} />
+                </div>
+                <div>
+                  <DrawerDialogSupplierDelete supplier={supplier} />
+                </div>
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </div>
   );
 }

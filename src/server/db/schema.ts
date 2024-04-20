@@ -2,7 +2,6 @@ import {
   pgTable,
   serial,
   text,
-  uniqueIndex,
   integer,
 } from "drizzle-orm/pg-core";
 
@@ -27,11 +26,6 @@ export const Categories = pgTable(
   {
     id: serial("id").primaryKey(),
     name: text("name").notNull(),
-  },
-  (category) => {
-    return {
-      uniqueIdx: uniqueIndex("unique_idx").on(category.name),
-    };
   }
 );
 
@@ -40,11 +34,6 @@ export const Brands = pgTable(
   {
     id: serial("id").primaryKey(),
     name: text("name").notNull(),
-  },
-  (brand) => {
-    return {
-      uniqueIdx: uniqueIndex("unique_idx").on(brand.name),
-    };
   }
 );
 
@@ -53,11 +42,6 @@ export const Suppliers = pgTable(
   {
     id: serial("id").primaryKey(),
     name: text("name").notNull(),
-  },
-  (supplier) => {
-    return {
-      uniqueIdx: uniqueIndex("unique_idx").on(supplier.name),
-    };
   }
 );
 
@@ -67,10 +51,6 @@ export const Warehouses = pgTable(
     id: serial("id").primaryKey(),
     name: text("name").notNull(),
     address: text("address").notNull(),
-  },
-  (warehouse) => {
-    return {
-      uniqueIdx: uniqueIndex("unique_idx").on(warehouse.name),
-    };
   }
 );
+

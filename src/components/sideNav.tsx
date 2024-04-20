@@ -76,7 +76,7 @@ export default function SideNav() {
               <div className="grid place-items-center mr-4">
                 <IoFileTrayStacked size={14} />
               </div>
-              <Link href="/categories">Proveedores</Link>
+              <Link href="/suppliers">Proveedores</Link>
             </div>
             <div
               role="button"
@@ -85,7 +85,7 @@ export default function SideNav() {
               <div className="grid place-items-center mr-4">
                 <IoFileTrayStacked size={14} />
               </div>
-              <Link href="/categories">Almacenes</Link>
+              <Link href="/warehouses">Almacenes</Link>
             </div>
             <div
               role="button"

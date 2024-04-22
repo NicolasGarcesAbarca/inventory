@@ -97,7 +97,7 @@ export default function SideNav() {
           <div className="grid place-items-center mr-4">
             <IoMdPerson size={20} />
           </div>
-          Clientes
+          <Link href="/clients">Clientes</Link>
         </div>
         <div
           role="button"

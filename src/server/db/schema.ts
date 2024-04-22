@@ -54,3 +54,15 @@ export const Warehouses = pgTable(
   }
 );
 
+export const Clients = pgTable(
+  "clients",
+  {
+    id: serial("id").primaryKey(),
+    name: text("name").notNull(),
+    address: text("address").notNull(),
+    email: text("email").notNull(),
+    phone: text("phone").notNull(),
+  }
+);
+  
+

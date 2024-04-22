@@ -53,7 +53,7 @@ export default function DrawerDialogBase({
             <DialogTitle>{dialogTitle}</DialogTitle>
             <DialogDescription>{dialogDescription}</DialogDescription>
           </DialogHeader>
-          <div>{children}</div>
+          <div className="max-h-[400px] overflow-scroll px-2">{children}</div>
         </DialogContent>
       </Dialog>
     );

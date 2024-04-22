@@ -94,7 +94,7 @@ export default function SideNav() {
               <div className="grid place-items-center mr-4">
                 <IoFileTrayStacked size={14} />
               </div>
-              <Link href="/categories">Artículos</Link>
+              <Link href="/products">Artículos</Link>
             </div>
           </CollapsibleContent>
         </Collapsible>

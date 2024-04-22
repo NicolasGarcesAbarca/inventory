@@ -10,6 +10,7 @@ export async function POST(request: Request) {
 
 export async function GET(request: Request) {
   const result = await db.select().from(Categories);
+  console.log({ logres: result });
   return Response.json(result);
 }
 

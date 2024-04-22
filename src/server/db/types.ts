@@ -9,4 +9,4 @@ export type SupplierSelect = InferSelectModel<typeof Suppliers>;
 
 export type WarehousesSelect = InferSelectModel<typeof Warehouses>;
 
-export type ProductsSelect = InferSelectModel<typeof Products>;
+export type ProductSelect = InferSelectModel<typeof Products>;

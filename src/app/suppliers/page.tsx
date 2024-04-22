@@ -11,6 +11,7 @@ import { Suppliers } from "@/server/db/schema";
 import DrawerDialogSupplierCreate from "@/components/dialogs/DrawerDialogSupplierCreate";
 import { DrawerDialogSupplierUpdate } from "@/components/dialogs/DrawerDialogSupplierUpdate";
 import DrawerDialogSupplierDelete from "@/components/dialogs/DrawerDialogSupplierDelete";
+import EmptyTable from "@/components/empty/table";
 
 export default async function CategoriesComp() {
   const suppliers = await db.select().from(Suppliers);
@@ -20,7 +21,9 @@ export default async function CategoriesComp() {
       <div className="py-4 flex flex-row-reverse">
         <DrawerDialogSupplierCreate />
       </div>
-      <Table className="border">
+      {suppliers.length < 1 ? (
+        <EmptyTable message="No hay proveedores registrados" />
+      ):<Table className="border">
         <TableHeader>
           <TableRow>
             <TableHead>Nombre</TableHead>
@@ -42,7 +45,7 @@ export default async function CategoriesComp() {
             </TableRow>
           ))}
         </TableBody>
-      </Table>
+      </Table>}
     </div>
   );
 }

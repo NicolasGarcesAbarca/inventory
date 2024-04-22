@@ -11,6 +11,7 @@ import { Brands } from "@/server/db/schema";
 import DrawerDialogBrandCreate from "@/components/dialogs/DrawerDialogBrandCreate";
 import { DrawerDialogBrandUpdate } from "@/components/dialogs/DrawerDialogBrandUpdate";
 import DrawerDialogBrandDelete from "@/components/dialogs/DrawerDialogBrandDelete";
+import EmptyTable from "@/components/empty/table";
 
 export default async function CategoriesComp() {
   const brands = await db.select().from(Brands);
@@ -20,29 +21,33 @@ export default async function CategoriesComp() {
       <div className="py-4 flex flex-row-reverse">
         <DrawerDialogBrandCreate />
       </div>
-      <Table className="border">
-        <TableHeader>
-          <TableRow>
-            <TableHead>Nombre</TableHead>
-            <TableHead>Acciones</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {brands.map((brand) => (
-            <TableRow key={brand.id}>
-              <TableCell className="font-medium">{brand.name}</TableCell>
-              <TableCell className="flex gap-2">
-                <div>
-                  <DrawerDialogBrandUpdate brand={brand} />
-                </div>
-                <div>
-                  <DrawerDialogBrandDelete brand={brand} />
-                </div>
-              </TableCell>
+      {brands.length < 1 ? (
+        <EmptyTable message="No hay marcas registradas" />
+      ) : (
+        <Table className="border">
+          <TableHeader>
+            <TableRow>
+              <TableHead>Nombre</TableHead>
+              <TableHead>Acciones</TableHead>
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
+          </TableHeader>
+          <TableBody>
+            {brands.map((brand) => (
+              <TableRow key={brand.id}>
+                <TableCell className="font-medium">{brand.name}</TableCell>
+                <TableCell className="flex gap-2">
+                  <div>
+                    <DrawerDialogBrandUpdate brand={brand} />
+                  </div>
+                  <div>
+                    <DrawerDialogBrandDelete brand={brand} />
+                  </div>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      )}
     </div>
   );
 }

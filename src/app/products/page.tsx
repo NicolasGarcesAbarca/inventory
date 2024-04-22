@@ -11,6 +11,7 @@ import { Products } from "@/server/db/schema";
 import DrawerDialogProductCreate from "@/components/dialogs/DrawerDialogProductCreate";
 import { DrawerDialogProductUpdate } from "@/components/dialogs/DrawerDialogProductUpdate";
 import DrawerDialogProductDelete from "@/components/dialogs/DrawerDialogProductDelete";
+import EmptyTable from "@/components/empty/table";
 
 export default async function ProductPage() {
   const products = await db.select().from(Products);
@@ -20,7 +21,10 @@ export default async function ProductPage() {
       <div className="py-4 flex flex-row-reverse">
         <DrawerDialogProductCreate />
       </div>
-      <Table className="border">
+
+      {products.length < 1 ? (
+        <EmptyTable message="No hay productos registrados" />
+      ):<Table className="border">
         <TableHeader>
           <TableRow>
             <TableHead>Name</TableHead>
@@ -42,7 +46,7 @@ export default async function ProductPage() {
             </TableRow>
           ))}
         </TableBody>
-      </Table>
+      </Table>}
     </div>
   );
 }

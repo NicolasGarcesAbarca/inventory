@@ -11,6 +11,7 @@ import { db } from "@/server/db";
 import { Categories } from "@/server/db/schema";
 import DrawerDialogCategoryDelete from "@/components/dialogs/DrawerDialogCategoryDelete";
 import { DrawerDialogCategoryUpdate } from "@/components/dialogs/DrawerDialogCategoryUpdate";
+import EmptyTable from "@/components/empty/table";
 
 export default async function CategoriesComp() {
   const categories = await db.select().from(Categories);
@@ -20,29 +21,33 @@ export default async function CategoriesComp() {
       <div className="py-4 flex flex-row-reverse">
         <DrawerDialogCategoryCreate />
       </div>
-      <Table className="border">
-        <TableHeader>
-          <TableRow>
-            <TableHead>Name</TableHead>
-            <TableHead>Actions</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {categories.map((cat) => (
-            <TableRow key={cat.id}>
-              <TableCell className="font-medium">{cat.name}</TableCell>
-              <TableCell className="flex gap-2">
-                <div>
-                  <DrawerDialogCategoryUpdate category={cat} />
-                </div>
-                <div>
-                  <DrawerDialogCategoryDelete category={cat} />
-                </div>
-              </TableCell>
+      {categories.length < 1 ? (
+        <EmptyTable message="No hay categorías registradas" />
+      ) : (
+        <Table className="border">
+          <TableHeader>
+            <TableRow>
+              <TableHead>Name</TableHead>
+              <TableHead>Actions</TableHead>
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
+          </TableHeader>
+          <TableBody>
+            {categories.map((cat) => (
+              <TableRow key={cat.id}>
+                <TableCell className="font-medium">{cat.name}</TableCell>
+                <TableCell className="flex gap-2">
+                  <div>
+                    <DrawerDialogCategoryUpdate category={cat} />
+                  </div>
+                  <div>
+                    <DrawerDialogCategoryDelete category={cat} />
+                  </div>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      )}
     </div>
   );
 }

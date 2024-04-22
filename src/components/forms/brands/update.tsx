@@ -15,6 +15,9 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { BrandSelect } from "@/server/db/types";
+import { useState } from "react";
+import { useToast } from "@/components/ui/use-toast";
+import SmallSpinner from "@/components/spinners/small";
 
 const formSchema = z.object({
   name: z.string().min(1, {
@@ -28,6 +31,9 @@ interface IProps {
 }
 
 export default function FormBrandUpdate({ brand, setModalOpen }: IProps) {
+  const [isLoading, setIsLoading] = useState(false);
+  const { toast } = useToast();
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -36,16 +42,21 @@ export default function FormBrandUpdate({ brand, setModalOpen }: IProps) {
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    fetch("/api/brands", {
+    setIsLoading(true);
+    await fetch("/api/brands", {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ ...values, id: brand.id }),
     });
+    setIsLoading(false);
     setModalOpen((prev) => !prev);
+    toast({
+      title: "Marca editada Correctamente",
+    });
   }
-
+  if (isLoading) return <SmallSpinner />;
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">

@@ -14,6 +14,9 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { useToast } from "@/components/ui/use-toast";
+import { useState } from "react";
+import SmallSpinner from "@/components/spinners/small";
 
 const formSchema = z.object({
   name: z.string().min(1, {
@@ -25,6 +28,9 @@ interface IProps {
   setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 export default function FormBrandCreate({ setModalOpen }: IProps) {
+  const [isLoading, setIsLoading] = useState(false);
+  const { toast } = useToast();
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -33,6 +39,7 @@ export default function FormBrandCreate({ setModalOpen }: IProps) {
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
+    setIsLoading(true);
     await fetch("/api/brands", {
       method: "POST",
       headers: {
@@ -40,8 +47,14 @@ export default function FormBrandCreate({ setModalOpen }: IProps) {
       },
       body: JSON.stringify(values),
     });
+    setIsLoading(false);
     setModalOpen((prev) => !prev);
+    toast({
+      title: "Marca creada correctamente",
+    });
   }
+
+  if (isLoading) return <SmallSpinner />;
 
   return (
     <Form {...form}>

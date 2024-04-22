@@ -26,6 +26,8 @@ import { getCategories } from "@/lib/fetchers/category";
 import SmallSpinner from "@/components/spinners/small";
 import { getBrands } from "@/lib/fetchers/brands";
 import { getSuppliers } from "@/lib/fetchers/supplier";
+import { useState } from "react";
+import { useToast } from "@/components/ui/use-toast";
 
 const formSchema = z.object({
   name: z.string().min(1, {
@@ -46,6 +48,9 @@ interface IProps {
   setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 export default function FormProductCreate({ setModalOpen }: IProps) {
+  const [isLoading, setIsLoading] = useState(false);
+  const { toast } = useToast();
+
   //TODO check if there is a parallel way
   const {
     data: categories,
@@ -71,16 +76,21 @@ export default function FormProductCreate({ setModalOpen }: IProps) {
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    fetch("/api/products", {
+    setIsLoading(true);
+    await fetch("/api/products", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(values),
     });
+    setIsLoading(false);
     setModalOpen((prev) => !prev);
+    toast({
+      title: "Producto creado correctamente",
+    });
   }
-  if (isLoadingCategories || isLoadingBrands || isLoadingSuppliers)
+  if (isLoading || isLoadingCategories || isLoadingBrands || isLoadingSuppliers)
     return (
       <div className="">
         <SmallSpinner />

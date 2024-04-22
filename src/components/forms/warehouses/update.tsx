@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { WarehousesSelect } from "@/server/db/types";
+import SmallSpinner from "@/components/spinners/small";
 
 const formSchema = z.object({
   name: z.string().min(1, {
@@ -34,6 +35,9 @@ export default function FormWarehouseUpdate({
   warehouse,
   setModalOpen,
 }: IProps) {
+  const [isLoading, setIsLoading] = useState(false);
+  const { toast } = useToast();
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -43,15 +47,23 @@ export default function FormWarehouseUpdate({
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    fetch("/api/warehouses", {
+    setIsLoading(true);
+
+    await fetch("/api/warehouses", {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ ...values, id: warehouse.id }),
     });
+    setIsLoading(false);
     setModalOpen((prev) => !prev);
+    toast({
+      title: "Almacén editado correctamente",
+    });
   }
+
+  if (isLoading) return <SmallSpinner />;
 
   return (
     <Form {...form}>

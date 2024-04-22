@@ -15,6 +15,9 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { CategorySelect, SupplierSelect } from "@/server/db/types";
+import SmallSpinner from "@/components/spinners/small";
+import { useState } from "react";
+import { useToast } from "@/components/ui/use-toast";
 
 const formSchema = z.object({
   name: z.string().min(1, {
@@ -28,6 +31,9 @@ interface IProps {
 }
 
 export default function FormSupplierUpdate({ supplier, setModalOpen }: IProps) {
+  const [isLoading, setIsLoading] = useState(false);
+  const { toast } = useToast();
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -36,15 +42,22 @@ export default function FormSupplierUpdate({ supplier, setModalOpen }: IProps) {
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    fetch("/api/suppliers", {
+    setIsLoading(true);
+    await fetch("/api/suppliers", {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ ...values, id: supplier.id }),
     });
+    setIsLoading(false);
     setModalOpen((prev) => !prev);
+    toast({
+      title: "Proveedor editado correctamente",
+    });
   }
+
+  if (isLoading) return <SmallSpinner />;
 
   return (
     <Form {...form}>

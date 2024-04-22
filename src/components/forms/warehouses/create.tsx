@@ -14,6 +14,9 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { useState } from "react";
+import { useToast } from "@/components/ui/use-toast";
+import SmallSpinner from "@/components/spinners/small";
 
 const formSchema = z.object({
   name: z.string().min(1, {
@@ -28,6 +31,9 @@ interface IProps {
   setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 export default function FormWarehouseCreate({ setModalOpen }: IProps) {
+  const [isLoading, setIsLoading] = useState(false);
+  const { toast } = useToast();
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -36,15 +42,23 @@ export default function FormWarehouseCreate({ setModalOpen }: IProps) {
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    fetch("/api/warehouses", {
+    setIsLoading(true);
+    
+    await fetch("/api/warehouses", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(values),
     });
+    setIsLoading(false);
     setModalOpen((prev) => !prev);
+    toast({
+      title: "Almacén creado correctamente",
+    });
   }
+
+  if (isLoading) return <SmallSpinner />;
 
   return (
     <Form {...form}>

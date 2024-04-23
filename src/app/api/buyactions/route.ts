@@ -1,4 +1,5 @@
 import { db } from "@/server/db";
+import insertProductWarehouse from "@/server/db/functions/ProductWarehouse/insert";
 import { BuyActions } from "@/server/db/schema";
 import { eq } from "drizzle-orm";
 import { z } from "zod";
@@ -21,6 +22,11 @@ export async function POST(request: Request) {
     supplierId: parseInt(body.supplierId, 10),
   });
   const result = await db.insert(BuyActions).values(buyaction).returning();
+  await insertProductWarehouse({
+    productId: buyaction.productId,
+    warehouseId: buyaction.warehouseId,
+    quantity: buyaction.quantity,
+  });
   return Response.json({ msg: "Compra creada!" });
 }
 
@@ -42,11 +48,10 @@ export async function PUT(request: Request) {
 }
 
 export async function DELETE(request: Request) {
-    const body = await request.json();
-    const result = await db
-      .delete(BuyActions)
-      .where(eq(BuyActions.id, body.id))
-      .returning();
-    return Response.json({ msg: result });
-  }
-  
+  const body = await request.json();
+  const result = await db
+    .delete(BuyActions)
+    .where(eq(BuyActions.id, body.id))
+    .returning();
+  return Response.json({ msg: result });
+}

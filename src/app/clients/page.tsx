@@ -8,9 +8,6 @@ import {
 } from "@/components/ui/table";
 import { db } from "@/server/db";
 import { Clients } from "@/server/db/schema";
-import DrawerDialogWarehouseCreate from "@/components/dialogs/DrawerDialogWarehouseCreate";
-import DrawerDialogWarehouseUpdate from "@/components/dialogs/DrawerDialogWarehouseUpdate";
-import DrawerDialogWarehouseDelete from "@/components/dialogs/DrawerDialogWarehouseDelete";
 import EmptyTable from "@/components/empty/table";
 import DrawerDialogClientCreate from "@/components/dialogs/DrawerDialogClientCreate";
 import { DrawerDialogClientUpdate } from "@/components/dialogs/DrawerDialogClientUpdate";

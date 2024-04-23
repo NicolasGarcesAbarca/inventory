@@ -14,7 +14,7 @@ export default function DrawerDialogWarehouseUpdate({ warehouse }: IProps) {
     <DrawerDialogBase
       open={open}
       setOpen={setOpen}
-      buttonText="Editar Almacén"
+      buttonText="Editar"
       dialogTitle="Editar Almacén"
       dialogDescription="Editar Almacén existente"
     >

@@ -12,6 +12,8 @@ import DrawerDialogWarehouseCreate from "@/components/dialogs/DrawerDialogWareho
 import DrawerDialogWarehouseUpdate from "@/components/dialogs/DrawerDialogWarehouseUpdate";
 import DrawerDialogWarehouseDelete from "@/components/dialogs/DrawerDialogWarehouseDelete";
 import EmptyTable from "@/components/empty/table";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 export default async function WarehousesComponent() {
   const warehouses = await db.select().from(Warehouses);
@@ -41,6 +43,11 @@ export default async function WarehousesComponent() {
                 </TableCell>
 
                 <TableCell className="flex gap-2">
+                  <div>
+                  <Button variant="outline">
+                    <Link href={"warehouses/" + warehouse.id}>Ver Detalle</Link>
+                  </Button>
+                  </div>
                   <div>
                     <DrawerDialogWarehouseUpdate warehouse={warehouse} />
                   </div>

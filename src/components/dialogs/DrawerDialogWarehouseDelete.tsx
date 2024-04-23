@@ -16,7 +16,7 @@ export default function DrawerDialogWarehouseDelete({ warehouse }: IProps) {
     <DrawerDialogBase
       open={open}
       setOpen={setOpen}
-      buttonText="Borrar Almacén"
+      buttonText="Borrar"
       dialogTitle="Borrar Almacén"
       dialogDescription=""
     >

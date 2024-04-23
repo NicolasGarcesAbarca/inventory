@@ -1,4 +1,4 @@
-import DrawerDialogCategoryCreate from "@/components/dialogs/DrawerDialogCategoryCreate";
+import { cookies } from "next/headers";
 import {
   Table,
   TableBody,
@@ -9,11 +9,13 @@ import {
 } from "@/components/ui/table";
 import { db } from "@/server/db";
 import { Categories } from "@/server/db/schema";
+import DrawerDialogCategoryCreate from "@/components/dialogs/DrawerDialogCategoryCreate";
 import DrawerDialogCategoryDelete from "@/components/dialogs/DrawerDialogCategoryDelete";
 import { DrawerDialogCategoryUpdate } from "@/components/dialogs/DrawerDialogCategoryUpdate";
 import EmptyTable from "@/components/empty/table";
 
 export default async function CategoriesComp() {
+  const cks = cookies();
   const categories = await db.select().from(Categories);
   return (
     <div className="px-24  w-full h-screen">

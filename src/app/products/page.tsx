@@ -12,8 +12,10 @@ import DrawerDialogProductCreate from "@/components/dialogs/DrawerDialogProductC
 import { DrawerDialogProductUpdate } from "@/components/dialogs/DrawerDialogProductUpdate";
 import DrawerDialogProductDelete from "@/components/dialogs/DrawerDialogProductDelete";
 import EmptyTable from "@/components/empty/table";
+import { cookies } from "next/headers";
 
 export default async function ProductPage() {
+  const cks = cookies();
   const products = await db.select().from(Products);
   return (
     <div className="px-24  w-full h-screen">

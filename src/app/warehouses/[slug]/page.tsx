@@ -9,12 +9,14 @@ import {
 import { db } from "@/server/db";
 import { ProductWarehouse, Products, Warehouses } from "@/server/db/schema";
 import { eq } from "drizzle-orm";
+import { cookies } from "next/headers";
 
 interface IProps {
   params: { slug: string };
 }
 
 export default async function WarehouseDetailPage({ params }: IProps) {
+  const cks = cookies();
   const id = parseInt(params.slug, 10);
   const warehouses = await db
     .select()

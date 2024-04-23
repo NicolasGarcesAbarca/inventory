@@ -14,8 +14,10 @@ import DrawerDialogWarehouseDelete from "@/components/dialogs/DrawerDialogWareho
 import EmptyTable from "@/components/empty/table";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { cookies } from "next/headers";
 
 export default async function WarehousesComponent() {
+  const cks = cookies();
   const warehouses = await db.select().from(Warehouses);
   return (
     <div className="px-24  w-full h-screen">

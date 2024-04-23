@@ -12,8 +12,10 @@ import DrawerDialogSupplierCreate from "@/components/dialogs/DrawerDialogSupplie
 import { DrawerDialogSupplierUpdate } from "@/components/dialogs/DrawerDialogSupplierUpdate";
 import DrawerDialogSupplierDelete from "@/components/dialogs/DrawerDialogSupplierDelete";
 import EmptyTable from "@/components/empty/table";
+import { cookies } from "next/headers";
 
 export default async function CategoriesComp() {
+  const cks = cookies();
   const suppliers = await db.select().from(Suppliers);
   return (
     <div className="px-24  w-full h-screen">

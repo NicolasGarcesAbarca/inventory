@@ -12,8 +12,10 @@ import EmptyTable from "@/components/empty/table";
 import DrawerDialogClientCreate from "@/components/dialogs/DrawerDialogClientCreate";
 import { DrawerDialogClientUpdate } from "@/components/dialogs/DrawerDialogClientUpdate";
 import DrawerDialogClientDelete from "@/components/dialogs/DrawerDialogClientDelete";
+import { cookies } from "next/headers";
 
 export default async function ClientsPage() {
+  const cks = cookies();
   const clients = await db.select().from(Clients);
   return (
     <div className="px-24  w-full h-screen">

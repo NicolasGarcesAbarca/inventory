@@ -18,8 +18,10 @@ import DrawerDialogBuyActionCreate from "@/components/dialogs/DrawerDialogBuyAct
 import { eq } from "drizzle-orm";
 import { DrawerDialogBuyActionUpdate } from "@/components/dialogs/DrawerDialogBuyActionUpdate";
 import DrawerDialogBuyActionDelete from "@/components/dialogs/DrawerDialogBuyActionDelete";
+import { cookies } from "next/headers";
 
 export default async function BuyactionsPage() {
+  const cks = cookies();
   const buyactions = await db
     .select()
     .from(BuyActions)

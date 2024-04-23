@@ -12,7 +12,7 @@ interface IProps {
 
 export default function BoxCategoryDelete({ category, setModalOpen }: IProps) {
   const [isLoading, setIsLoading] = useState(false);
-  const {toast} = useToast();
+  const { toast } = useToast();
   const handleDelete = async () => {
     setIsLoading(true);
     await fetch("/api/categories", {
@@ -25,8 +25,9 @@ export default function BoxCategoryDelete({ category, setModalOpen }: IProps) {
     setIsLoading(false);
     setModalOpen(false);
     toast({
-      title:"Categoría Eliminada"
-    })
+      title: "Categoría Eliminada",
+    });
+    location.reload();
   };
   return (
     <div className="flex flex-col gap-3">

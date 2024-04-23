@@ -95,6 +95,7 @@ export default function FormBuyActionUpdate({
     toast({
       title: "Compra editada correctamente",
     });
+    location.reload()
   }
   if (
     isLoading ||

@@ -64,6 +64,7 @@ export default function FormClientCreate({ setModalOpen }: IProps) {
     toast({
       title: "Cliente creado correctamente",
     });
+    location.reload()
   }
 
   if (isLoading) return <SmallSpinner />;

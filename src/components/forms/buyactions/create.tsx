@@ -90,6 +90,7 @@ export default function FormBuyActionCreate({ setModalOpen }: IProps) {
     toast({
       title: "Compra creada correctamente",
     });
+    location.reload()
   }
   if (
     isLoading ||

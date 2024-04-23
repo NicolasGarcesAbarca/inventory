@@ -55,6 +55,7 @@ export default function FormCategoryUpdate({ category, setModalOpen }: IProps) {
     toast({
       title: "Categoría editada correctamente",
     });
+    location.reload()
   }
   if (isLoading) return <SmallSpinner />;
   

@@ -52,6 +52,7 @@ export default function FormCategoryCreate({ setModalOpen }: IProps) {
     toast({
       title: "Categoría creada correctamente",
     });
+    location.reload()
   }
 
   if (isLoading) return <SmallSpinner />;

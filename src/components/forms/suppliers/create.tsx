@@ -52,6 +52,7 @@ export default function FormSupplierCreate({ setModalOpen }: IProps) {
     toast({
       title: "Proveedor creado correctamente",
     });
+    location.reload()
   }
   if (isLoading) return <SmallSpinner />;
   

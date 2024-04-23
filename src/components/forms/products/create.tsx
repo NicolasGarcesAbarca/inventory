@@ -89,6 +89,7 @@ export default function FormProductCreate({ setModalOpen }: IProps) {
     toast({
       title: "Producto creado correctamente",
     });
+    location.reload()
   }
   if (isLoading || isLoadingCategories || isLoadingBrands || isLoadingSuppliers)
     return (

@@ -12,7 +12,7 @@ interface IProps {
 
 export default function BoxProductDelete({ product, setModalOpen }: IProps) {
   const [isLoading, setIsLoading] = useState(false);
-  const {toast} = useToast();
+  const { toast } = useToast();
   const handleDelete = async () => {
     setIsLoading(true);
     await fetch("/api/products", {
@@ -25,8 +25,9 @@ export default function BoxProductDelete({ product, setModalOpen }: IProps) {
     setIsLoading(false);
     setModalOpen(false);
     toast({
-      title:"Producto Eliminado"
-    })
+      title: "Producto Eliminado",
+    });
+    location.reload();
   };
   return (
     <div className="flex flex-col gap-3">

@@ -12,7 +12,7 @@ interface IProps {
 
 export default function BoxClientDelete({ client, setModalOpen }: IProps) {
   const [isLoading, setIsLoading] = useState(false);
-  const {toast} = useToast();
+  const { toast } = useToast();
   const handleDelete = async () => {
     setIsLoading(true);
     await fetch("/api/clients", {
@@ -25,8 +25,9 @@ export default function BoxClientDelete({ client, setModalOpen }: IProps) {
     setIsLoading(false);
     setModalOpen(false);
     toast({
-      title:"Cliente eliminado"
-    })
+      title: "Cliente eliminado",
+    });
+    location.reload();
   };
   return (
     <div className="flex flex-col gap-3">

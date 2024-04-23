@@ -56,6 +56,7 @@ export default function FormWarehouseCreate({ setModalOpen }: IProps) {
     toast({
       title: "Almacén creado correctamente",
     });
+    location.reload()
   }
 
   if (isLoading) return <SmallSpinner />;

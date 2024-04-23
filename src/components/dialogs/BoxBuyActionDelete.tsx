@@ -30,6 +30,7 @@ export default function BoxBuyActionDelete({
     toast({
       title: "Compra Eliminada",
     });
+    location.reload()
   };
   return (
     <div className="flex flex-col gap-3">

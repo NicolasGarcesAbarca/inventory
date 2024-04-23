@@ -55,6 +55,7 @@ export default function FormSupplierUpdate({ supplier, setModalOpen }: IProps) {
     toast({
       title: "Proveedor editado correctamente",
     });
+    location.reload()
   }
 
   if (isLoading) return <SmallSpinner />;

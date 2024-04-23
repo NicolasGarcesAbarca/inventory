@@ -63,6 +63,7 @@ export default function FormWarehouseUpdate({
     toast({
       title: "Almacén editado correctamente",
     });
+    location.reload()
   }
 
   if (isLoading) return <SmallSpinner />;

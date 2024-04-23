@@ -55,6 +55,7 @@ export default function FormBrandUpdate({ brand, setModalOpen }: IProps) {
     toast({
       title: "Marca editada Correctamente",
     });
+    location.reload()
   }
   if (isLoading) return <SmallSpinner />;
   return (

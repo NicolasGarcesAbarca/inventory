@@ -52,6 +52,7 @@ export default function FormBrandCreate({ setModalOpen }: IProps) {
     toast({
       title: "Marca creada correctamente",
     });
+    location.reload()
   }
 
   if (isLoading) return <SmallSpinner />;

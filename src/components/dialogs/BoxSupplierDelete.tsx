@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { SupplierSelect } from "@/server/db/types";
 import { Button } from "../ui/button";
@@ -28,6 +28,7 @@ export default function BoxSupplierDelete({ supplier, setModalOpen }: IProps) {
     toast({
       title: "Proveedor Eliminado",
     });
+    location.reload();
   };
   return (
     <div className="flex flex-col gap-3">

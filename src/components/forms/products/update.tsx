@@ -97,6 +97,7 @@ export default function FormProductUpdate({ product, setModalOpen }: IProps) {
     toast({
       title: "Producto editado correctamente",
     });
+    location.reload()
   }
   if (isLoadingCategories || isLoadingBrands || isLoadingSuppliers)
     return (

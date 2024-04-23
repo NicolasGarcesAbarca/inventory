@@ -27,6 +27,7 @@ export default function BoxBrandDelete({ brand, setModalOpen }: IProps) {
     toast({
       title: "Marca Eliminada",
     });
+    location.reload()
   };
   return (
     <div className="flex flex-col gap-3">

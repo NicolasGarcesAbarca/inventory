@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { WarehousesSelect } from "@/server/db/types";
 import { Button } from "../ui/button";
@@ -7,11 +7,14 @@ import { TailSpin } from "react-loader-spinner";
 import { useToast } from "@/components/ui/use-toast";
 
 interface IProps {
-    warehouse: WarehousesSelect;
+  warehouse: WarehousesSelect;
   setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export default function BoxWarehouseDelete({ warehouse, setModalOpen }: IProps) {
+export default function BoxWarehouseDelete({
+  warehouse,
+  setModalOpen,
+}: IProps) {
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
   const handleDelete = async () => {
@@ -28,6 +31,7 @@ export default function BoxWarehouseDelete({ warehouse, setModalOpen }: IProps) 
     toast({
       title: "Almacén Eliminado",
     });
+    location.reload();
   };
   return (
     <div className="flex flex-col gap-3">

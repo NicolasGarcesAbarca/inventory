@@ -67,6 +67,7 @@ export default function FormClientUpdate({ client, setModalOpen }: IProps) {
     toast({
       title: "Cliente editado correctamente",
     });
+    location.reload()
   }
 
   if (isLoading) return <SmallSpinner />;

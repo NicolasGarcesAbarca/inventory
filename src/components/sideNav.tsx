@@ -106,7 +106,7 @@ export default function SideNav() {
           <div className="grid place-items-center mr-4">
             <FaCartPlus size={20} />
           </div>
-          Compras
+          <Link href="/buyactions">Compras</Link>
         </div>
         <div
           role="button"

@@ -21,7 +21,7 @@ export async function PUT(request: Request) {
     .set({ name: body.name })
     .where(eq(Categories.id, body.id))
     .returning();
-  return Response.json({ msg: "wena" });
+  return Response.json({ msg: "Categoria actualizada!" });
 }
 
 export async function DELETE(request: Request) {

@@ -5,7 +5,7 @@ import { eq } from "drizzle-orm";
 export async function POST(request: Request) {
   const body = await request.json();
   const result = await db.insert(Warehouses).values(body).returning();
-  return Response.json({ msg: "Almace creado! " });
+  return Response.json({ msg: "Almacen creado! " });
 }
 
 export async function GET(request: Request) {
@@ -20,7 +20,7 @@ export async function PUT(request: Request) {
     .set({ name: body.name, address: body.address })
     .where(eq(Warehouses.id, body.id))
     .returning();
-  return Response.json({ msg: "wena" });
+  return Response.json({ msg: "Almacen actualizado! " });
 }
 
 export async function DELETE(request: Request) {

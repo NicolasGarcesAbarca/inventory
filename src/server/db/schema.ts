@@ -3,6 +3,7 @@ import {
   serial,
   text,
   integer,
+  timestamp,
 } from "drizzle-orm/pg-core";
 
 export const Products = pgTable("products", {
@@ -66,3 +67,12 @@ export const Clients = pgTable(
 );
   
 
+export const BuyActions = pgTable("buy_actions", {
+  id: serial("id").primaryKey(),
+  price: integer("price").notNull(),
+  quantity: integer("quantity").notNull(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  supplierId: integer("supplier_id").references(() => Suppliers.id),
+  productId: integer("product_id").references(() => Products.id),
+  warehouseId: integer("warehouse_id").references(() => Warehouses.id),
+});

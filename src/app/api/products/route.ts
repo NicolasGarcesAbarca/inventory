@@ -23,7 +23,7 @@ export async function POST(request: Request) {
     supplierId: parseInt(body.supplierId, 10),
   });
   const result = await db.insert(Products).values(product).returning();
-  return Response.json({ msg: "Categoria creada!" });
+  return Response.json({ msg: "Producto creado!" });
 }
 
 export async function GET(request: Request) {
@@ -46,7 +46,7 @@ export async function PUT(request: Request) {
     .set(product)
     .where(eq(Products.id, body.id))
     .returning();
-  return Response.json({ msg: "wena" });
+  return Response.json({ msg: "Producto actualizado!" });
 }
 
 export async function DELETE(request: Request) {

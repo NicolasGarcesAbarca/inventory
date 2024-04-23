@@ -20,7 +20,7 @@ export async function PUT(request: Request) {
     .set(body)
     .where(eq(Clients.id, body.id))
     .returning();
-  return Response.json({ msg: "wena" });
+  return Response.json({ msg: "Cliente actualizado!" });
 }
 
 export async function DELETE(request: Request) {

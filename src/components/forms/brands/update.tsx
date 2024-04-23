@@ -67,7 +67,7 @@ export default function FormBrandUpdate({ brand, setModalOpen }: IProps) {
             <FormItem>
               <FormLabel>Categoria</FormLabel>
               <FormControl>
-                <Input placeholder="Corona" {...field} />
+                <Input placeholder="Categoria" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>

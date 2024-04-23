@@ -68,7 +68,7 @@ export default function FormCategoryUpdate({ category, setModalOpen }: IProps) {
             <FormItem>
               <FormLabel>Categoria</FormLabel>
               <FormControl>
-                <Input placeholder="muebles" {...field} />
+                <Input placeholder="categoria" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>

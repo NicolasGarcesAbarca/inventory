@@ -27,7 +27,7 @@ export default function SideNav() {
           <div className="grid place-items-center mr-4">
             <BiSolidDashboard size={20} />
           </div>
-          <Link href="/dashboard">Dashboard</Link>
+          <Link href="/products">Dashboard</Link>
         </div>
         <Collapsible>
           <CollapsibleTrigger className="w-full">
@@ -86,7 +86,7 @@ export default function SideNav() {
               <div className="grid place-items-center mr-4">
                 <IoFileTrayStacked size={14} />
               </div>
-              <Link href="/products">Artículos</Link>
+              <Link href="/products">Productos</Link>
             </div>
           </CollapsibleContent>
         </Collapsible>

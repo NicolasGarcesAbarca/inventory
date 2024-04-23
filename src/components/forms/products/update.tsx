@@ -117,7 +117,7 @@ export default function FormProductUpdate({ product, setModalOpen }: IProps) {
               <FormItem>
                 <FormLabel>Nombre</FormLabel>
                 <FormControl>
-                  <Input placeholder="Fabricante" {...field} />
+                  <Input placeholder="Rafael" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -130,7 +130,7 @@ export default function FormProductUpdate({ product, setModalOpen }: IProps) {
               <FormItem>
                 <FormLabel>Codigo</FormLabel>
                 <FormControl>
-                  <Input placeholder="Fabricante" {...field} />
+                  <Input placeholder="9e#45rt" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -143,7 +143,7 @@ export default function FormProductUpdate({ product, setModalOpen }: IProps) {
               <FormItem>
                 <FormLabel>Precio</FormLabel>
                 <FormControl>
-                  <Input placeholder="Fabricante" {...field} />
+                  <Input placeholder="11890" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>

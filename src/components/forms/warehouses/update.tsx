@@ -77,7 +77,7 @@ export default function FormWarehouseUpdate({
             <FormItem>
               <FormLabel>Nombre</FormLabel>
               <FormControl>
-                <Input placeholder="Fabricante" {...field} />
+                <Input placeholder="Bodega 2" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>

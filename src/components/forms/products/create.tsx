@@ -109,7 +109,7 @@ export default function FormProductCreate({ setModalOpen }: IProps) {
               <FormItem>
                 <FormLabel>Nombre</FormLabel>
                 <FormControl>
-                  <Input placeholder="Fabricante" {...field} />
+                  <Input placeholder="X" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -122,7 +122,7 @@ export default function FormProductCreate({ setModalOpen }: IProps) {
               <FormItem>
                 <FormLabel>Codigo</FormLabel>
                 <FormControl>
-                  <Input placeholder="Fabricante" {...field} />
+                  <Input placeholder="12#2fre77" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -135,7 +135,7 @@ export default function FormProductCreate({ setModalOpen }: IProps) {
               <FormItem>
                 <FormLabel>Precio</FormLabel>
                 <FormControl>
-                  <Input placeholder="Fabricante" {...field} />
+                  <Input placeholder="3990" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>

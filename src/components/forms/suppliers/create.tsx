@@ -65,7 +65,7 @@ export default function FormSupplierCreate({ setModalOpen }: IProps) {
             <FormItem>
               <FormLabel>Proveedor</FormLabel>
               <FormControl>
-                <Input placeholder="Fabricante" {...field} />
+                <Input placeholder="FabricanteX" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>

@@ -19,9 +19,16 @@ import { eq } from "drizzle-orm";
 import { DrawerDialogBuyActionUpdate } from "@/components/dialogs/DrawerDialogBuyActionUpdate";
 import DrawerDialogBuyActionDelete from "@/components/dialogs/DrawerDialogBuyActionDelete";
 import { cookies } from "next/headers";
+import { getCurrentUser } from "@/lib/auth/user";
+import { authOptions } from "@/lib/auth";
+import { redirect } from "next/navigation";
 
 export default async function BuyactionsPage() {
   const cks = cookies();
+  const user = await getCurrentUser();
+  if (!user) {
+    redirect(authOptions?.pages?.signIn || "/login");
+  }
   const buyactions = await db
     .select()
     .from(BuyActions)

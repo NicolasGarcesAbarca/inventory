@@ -13,9 +13,16 @@ import DrawerDialogCategoryCreate from "@/components/dialogs/DrawerDialogCategor
 import DrawerDialogCategoryDelete from "@/components/dialogs/DrawerDialogCategoryDelete";
 import { DrawerDialogCategoryUpdate } from "@/components/dialogs/DrawerDialogCategoryUpdate";
 import EmptyTable from "@/components/empty/table";
+import { getCurrentUser } from "@/lib/auth/user";
+import { redirect } from "next/navigation";
+import { authOptions } from "@/lib/auth";
 
 export default async function CategoriesComp() {
   const cks = cookies();
+  const user = await getCurrentUser();
+  if (!user) {
+    redirect(authOptions?.pages?.signIn || "/login");
+  }
   const categories = await db.select().from(Categories);
   return (
     <div className="px-24  w-full h-screen">

@@ -13,9 +13,16 @@ import { DrawerDialogBrandUpdate } from "@/components/dialogs/DrawerDialogBrandU
 import DrawerDialogBrandDelete from "@/components/dialogs/DrawerDialogBrandDelete";
 import EmptyTable from "@/components/empty/table";
 import { cookies } from "next/headers";
+import { authOptions } from "@/lib/auth";
+import { getCurrentUser } from "@/lib/auth/user";
+import { redirect } from "next/navigation";
 
 export default async function CategoriesComp() {
   const cks = cookies();
+  const user = await getCurrentUser();
+  if (!user) {
+    redirect(authOptions?.pages?.signIn || "/login");
+  }
   const brands = await db.select().from(Brands);
   return (
     <div className="px-24  w-full h-screen">

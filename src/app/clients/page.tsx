@@ -13,9 +13,16 @@ import DrawerDialogClientCreate from "@/components/dialogs/DrawerDialogClientCre
 import { DrawerDialogClientUpdate } from "@/components/dialogs/DrawerDialogClientUpdate";
 import DrawerDialogClientDelete from "@/components/dialogs/DrawerDialogClientDelete";
 import { cookies } from "next/headers";
+import { getCurrentUser } from "@/lib/auth/user";
+import { redirect } from "next/navigation";
+import { authOptions } from "@/lib/auth";
 
 export default async function ClientsPage() {
   const cks = cookies();
+  const user = await getCurrentUser();
+  if (!user) {
+    redirect(authOptions?.pages?.signIn || "/login");
+  }
   const clients = await db.select().from(Clients);
   return (
     <div className="px-24  w-full h-screen">

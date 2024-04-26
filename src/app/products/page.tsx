@@ -13,9 +13,16 @@ import { DrawerDialogProductUpdate } from "@/components/dialogs/DrawerDialogProd
 import DrawerDialogProductDelete from "@/components/dialogs/DrawerDialogProductDelete";
 import EmptyTable from "@/components/empty/table";
 import { cookies } from "next/headers";
+import { getCurrentUser } from "@/lib/auth/user";
+import { redirect } from "next/navigation";
+import { authOptions } from "@/lib/auth";
 
 export default async function ProductPage() {
   const cks = cookies();
+  const user = await getCurrentUser();
+  if (!user) {
+    redirect(authOptions?.pages?.signIn || "/login");
+  }
   const products = await db.select().from(Products);
   return (
     <div className="px-24  w-full h-screen">

@@ -6,10 +6,13 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { authOptions } from "@/lib/auth";
+import { getCurrentUser } from "@/lib/auth/user";
 import { db } from "@/server/db";
 import { ProductWarehouse, Products, Warehouses } from "@/server/db/schema";
 import { eq } from "drizzle-orm";
 import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
 interface IProps {
   params: { slug: string };
@@ -17,6 +20,10 @@ interface IProps {
 
 export default async function WarehouseDetailPage({ params }: IProps) {
   const cks = cookies();
+  const user = await getCurrentUser();
+  if (!user) {
+    redirect(authOptions?.pages?.signIn || "/login");
+  }
   const id = parseInt(params.slug, 10);
   const warehouses = await db
     .select()

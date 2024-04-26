@@ -9,16 +9,14 @@ export const metadata: Metadata = {
 
 export default function LoginPage() {
   return (
-    <div className="relative container flex h-screen w-screen flex-col items-center justify-center">
+    <div className="container flex flex-col justify-center items-center h-full w-full flex-col">
       <div className="flex flex-col justify-center sm:w-[350px]">
-        <div className="flex flex-col space-y-2 text-center">
-          <HiIdentification size={20}/>
-          <h1 className="text-2xl font-semibold tracking-tight">
-            Hola
-          </h1>
-          <p className="text-sm text-muted-foreground">
-            Ingresa con tu mail
-          </p>
+        <div className="flex flex-col">
+          <div className="flex flex-col items-center mb-6">
+            <HiIdentification size={26} />
+            <h1 className="text-2xl font-semibold tracking-tight">Hola</h1>
+            <p className="text-sm text-muted-foreground">Ingresa con tu mail</p>
+          </div>
         </div>
         <FormLogin />
       </div>

@@ -1,13 +1,14 @@
 import { DrizzleAdapter } from "@auth/drizzle-adapter";
 import { db } from "@/server/db";
-import { NextAuthOptions } from "next-auth";
+import { NextAuthOptions, User } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { env } from "../../../env.mjs";
 import { isAdmin } from "./admin";
+import type { Adapter } from "next-auth/adapters";
 
 export const authOptions: NextAuthOptions = {
   secret: env.NEXTAUTH_SECRET,
-  adapter: DrizzleAdapter(db),
+  adapter: DrizzleAdapter(db) as Adapter,
   session: {
     strategy: "jwt",
   },
@@ -28,7 +29,7 @@ export const authOptions: NextAuthOptions = {
             password: credentials?.password,
           })
         ) {
-          return { id: 0, name: "admin", email: credentials?.email };
+          return { id: "0", name: "admin", email: credentials?.email };
         }
         return null;
       },

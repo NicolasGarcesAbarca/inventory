@@ -9,8 +9,8 @@ export const metadata: Metadata = {
 
 export default function LoginPage() {
   return (
-    <div className="container flex flex-col justify-center items-center h-full w-full flex-col">
-      <div className="flex flex-col justify-center sm:w-[350px]">
+    <section className="container flex flex-col justify-center items-center h-full w-full flex-col bg-slate-100">
+      <div className="flex flex-col justify-center sm:w-[350px] shadow-lg px-10 py-10 rounded-lg bg-white">
         <div className="flex flex-col">
           <div className="flex flex-col items-center mb-6">
             <HiIdentification size={26} />
@@ -20,6 +20,6 @@ export default function LoginPage() {
         </div>
         <FormLogin />
       </div>
-    </div>
+    </section>
   );
 }

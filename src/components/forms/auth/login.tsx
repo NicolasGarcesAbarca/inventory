@@ -51,7 +51,7 @@ export default function FormLogin() {
       toast({
         title: "Bienvenido!",
       });
-      router.push("/")
+      router.push("/products")
     } else {
       toast({
         title: "Error",

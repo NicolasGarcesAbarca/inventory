@@ -36,8 +36,8 @@ export default async function CategoriesComp() {
         <Table className="border">
           <TableHeader>
             <TableRow>
-              <TableHead>Name</TableHead>
-              <TableHead>Actions</TableHead>
+              <TableHead>Nombre</TableHead>
+              <TableHead>Acciones</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>

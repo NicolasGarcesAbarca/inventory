@@ -8,6 +8,7 @@ This Next.js application provides a minimum viable product (MVP) for managing yo
 * PostgreSQL database: Stores product data securely on Vercel.
 * Drizzle ORM: Simplifies database interactions and data modeling.
 * NextAuth: Enables user authentication (implementation details may vary).
+* React Hook Form: Easy form management.
 
 ## Installation and Setup
 
